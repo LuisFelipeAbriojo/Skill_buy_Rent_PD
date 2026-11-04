@@ -21,6 +21,7 @@ python scripts/actualizar_bcrp.py
 
 | Ruta | Contenido |
 |---|---|
+| `.claude/skills/buy-vs-rent/` | Skill de Claude Code que usa el mismo motor |
 | `app.py` | La página |
 | `housing_lima/model.py` | Simulación mensual |
 | `housing_lima/analysis.py` | Sensibilidad, empates y distritos |

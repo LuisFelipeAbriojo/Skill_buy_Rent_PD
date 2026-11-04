@@ -4,7 +4,7 @@ import streamlit as st
 
 from housing_lima import analysis, datos, explain, graficos
 from housing_lima.explain import pct, soles
-from housing_lima.model import Caso, cuota_mensual, efectivo_inicial, mes_equilibrio, simular
+from housing_lima.model import efectivo_inicial, mes_equilibrio, simular
 
 st.set_page_config(page_title="Comprar o alquilar en Lima", page_icon="🏠", layout="wide")
 st.markdown("<style>[data-testid='stMetricValue']{font-size:1.6rem}</style>", unsafe_allow_html=True)
@@ -40,7 +40,7 @@ with st.sidebar:
 
     st.subheader("Crédito")
     inicial = st.slider("Cuota inicial (%)", 10, 50, round(S["inicial_pct"] * 100), step=5) / 100
-    tea = st.slider("Tasa hipotecaria, TEA (%)", 5.0, 12.0, round(tea_bcrp, 1), step=0.1,
+    tea = st.slider("Tasa hipotecaria, TEA (%)", 5.0, 12.0, round(tea_bcrp, 2), step=0.01,
                     help=f"Promedio de bancos en soles según el BCRP: {tea_bcrp:.2f}% a {periodo_tea}.") / 100
     plazo = st.slider("Plazo (años)", 10, 30, S["plazo_anios"], step=5)
 
@@ -68,13 +68,10 @@ with st.sidebar:
         mantenimiento = st.slider("Mantenimiento mayor (% anual)", 0.0, 2.0, S["mantenimiento"] * 100, step=0.1) / 100
         costo_venta = st.slider("Costo de vender (%)", 0.0, 6.0, S["costo_venta"] * 100, step=0.5) / 100
 
-caso = Caso(
-    precio=float(precio), alquiler=float(alquiler), inicial_pct=inicial, plazo_anios=plazo, tea=tea,
-    apreciacion=apreciacion, alza_alquiler=alza, retorno=retorno, inflacion=S["inflacion"],
-    gastos_cierre=S["gastos_cierre"], alcabala=S["alcabala"], uit=S["uit"], paga_alcabala=paga_alcabala,
-    predial_arbitrios=S["predial_arbitrios"], mantenimiento=mantenimiento,
-    seguro_desgravamen=S["seguro_desgravamen"], seguro_inmueble=S["seguro_inmueble"],
-    costo_venta=costo_venta, impuesto_ganancia=S["impuesto_ganancia"], casa_habitacion=casa_habitacion,
+caso = datos.caso(
+    precio, alquiler, inicial_pct=inicial, plazo_anios=plazo, tea=tea, apreciacion=apreciacion,
+    alza_alquiler=alza, retorno=retorno, paga_alcabala=paga_alcabala, mantenimiento=mantenimiento,
+    costo_venta=costo_venta, casa_habitacion=casa_habitacion,
 )
 sim = simular(caso)
 final = sim.iloc[anios * 12]

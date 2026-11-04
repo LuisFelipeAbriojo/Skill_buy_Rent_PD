@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: aviso-con-credito-y-etf
+expected_outcome: |
+  Corre el modelo con los datos del aviso, TEA 8.1, plazo 25, inicial 15, retorno 8 y 20 años. Reporta que alquilar gana por unos S/ 70,000 y advierte que el 8% del ETF es un supuesto con más riesgo.

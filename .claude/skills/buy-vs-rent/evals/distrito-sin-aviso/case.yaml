@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: distrito-sin-aviso
+expected_outcome: |
+  Usa el modelo con Santiago de Surco, 85 m2 y 15 años, y reporta que alquilar gana por unos S/ 59,000, marcando precio y alquiler como estimados.

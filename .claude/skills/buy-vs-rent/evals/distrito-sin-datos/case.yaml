@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: distrito-sin-datos
+expected_outcome: |
+  No inventa un resultado para Ate: explica que no hay datos de ese distrito y pide el precio y el alquiler de un aviso, sin sustituir otro distrito en silencio.

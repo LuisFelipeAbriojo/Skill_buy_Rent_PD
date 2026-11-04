@@ -4,6 +4,8 @@ from pathlib import Path
 
 import pandas as pd
 
+from .model import Caso
+
 RAIZ = Path(__file__).resolve().parents[1]
 MESES_ES = {"Ene": 1, "Feb": 2, "Mar": 3, "Abr": 4, "May": 5, "Jun": 6,
             "Jul": 7, "Ago": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dic": 12}
@@ -42,6 +44,14 @@ def ultimo(columna: str) -> tuple[float, str]:
     """Último valor disponible de una serie mensual y su periodo."""
     d = bcrp_mensual().dropna(subset=[columna])
     return float(d[columna].iloc[-1]), str(d["periodo"].iloc[-1])
+
+
+def caso(precio: float, alquiler: float, **cambios) -> Caso:
+    """Caso con los supuestos de config/ y las últimas tasas del BCRP; `cambios` los reemplaza."""
+    campos = {k: v["valor"] for k, v in config()["supuestos"].items()}
+    campos["tea"] = ultimo("tasa_hipotecaria_mn")[0] / 100
+    campos["retorno"] = ultimo("tasa_deposito_360_mn")[0] / 100
+    return Caso(precio=float(precio), alquiler=float(alquiler), **{**campos, **cambios})
 
 
 def crecimiento_precios(anios: int, columna: str = "precio_m2_corriente") -> float:
