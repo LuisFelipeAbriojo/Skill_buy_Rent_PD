@@ -1,0 +1,29 @@
+{
+  "indice_urbania": {
+    "base": {"mes": "may-2025", "precio_m2": 6816, "alquiler_100m2": 3208},
+    "actual": {"mes": "abr-2026", "precio_m2": 6886, "alquiler_100m2": 3356}
+  },
+  "supuestos": {
+    "inicial_pct": {"valor": 0.20, "nombre": "Cuota inicial", "tipo": "Supuesto", "fuente": "Caso base."},
+    "plazo_anios": {"valor": 20, "nombre": "Plazo del crédito (años)", "tipo": "Supuesto", "fuente": "Caso base."},
+    "tea": {"valor": 0.0747, "nombre": "Tasa hipotecaria (TEA)", "tipo": "Dato", "fuente": "BCRP, serie PN07848NM (se actualiza desde data/bcrp_mensual.csv)."},
+    "apreciacion": {"valor": 0.025, "nombre": "Apreciación de la vivienda", "tipo": "Supuesto", "fuente": "Precio real constante con inflación de 2.5%. BCRP: +3.7% nominal anual en 13 años, +1.2% en 10 años y +0.1% en 5 años."},
+    "alza_alquiler": {"valor": 0.03, "nombre": "Alza anual del alquiler", "tipo": "Supuesto", "fuente": "Algo sobre la inflación. Urbania: +8.1% en 12 meses a may-2025 y +4.6% de may-2025 a abr-2026."},
+    "retorno": {"valor": 0.0463, "nombre": "Retorno de la inversión alternativa", "tipo": "Dato", "fuente": "BCRP, depósitos en soles a 360 días o más, serie PN07815NM."},
+    "inflacion": {"valor": 0.025, "nombre": "Inflación de largo plazo", "tipo": "Supuesto", "fuente": "Dentro del rango meta del BCRP (1%-3%). La inflación observada a set-2026 es mayor: ver pestaña Datos."},
+    "gastos_cierre": {"valor": 0.01, "nombre": "Notaría y registros", "tipo": "Supuesto", "fuente": "Estimación, sin fuente oficial."},
+    "alcabala": {"valor": 0.03, "nombre": "Alcabala", "tipo": "Norma", "fuente": "3% sobre el exceso de 10 UIT. No aplica a la primera venta de una constructora."},
+    "uit": {"valor": 5500, "nombre": "UIT 2026 (S/)", "tipo": "Norma", "fuente": "D.S. 301-2025-EF."},
+    "predial_arbitrios": {"valor": 0.004, "nombre": "Predial y arbitrios (anual, % del valor)", "tipo": "Supuesto", "fuente": "Estimación; depende del municipio y del autovalúo."},
+    "mantenimiento": {"valor": 0.005, "nombre": "Mantenimiento mayor (anual, % del valor)", "tipo": "Supuesto", "fuente": "Estimación. La cuota de edificio no se incluye porque la paga igual quien alquila."},
+    "seguro_desgravamen": {"valor": 0.0004, "nombre": "Desgravamen (mensual, % del saldo)", "tipo": "Supuesto", "fuente": "Estimación; varía por banco y por edad."},
+    "seguro_inmueble": {"valor": 0.00025, "nombre": "Seguro del inmueble (mensual, % del valor)", "tipo": "Supuesto", "fuente": "Estimación; varía por banco."},
+    "costo_venta": {"valor": 0.03, "nombre": "Costo de vender (corretaje)", "tipo": "Supuesto", "fuente": "Práctica habitual de mercado; negociable."},
+    "impuesto_ganancia": {"valor": 0.05, "nombre": "Impuesto a la ganancia al vender", "tipo": "Norma", "fuente": "SUNAT: 5% de la ganancia. Exonerado si es casa-habitación con al menos 2 años."}
+  },
+  "alternativas": {
+    "Depósito a plazo (promedio de bancos)": {"valor": 0.0463, "tipo": "Dato BCRP", "riesgo": "Bajo; cubierto por el Fondo de Seguro hasta su límite."},
+    "Fondo de renta fija en soles": {"valor": 0.055, "tipo": "Supuesto", "riesgo": "Bajo a medio; el valor cuota puede bajar."},
+    "ETF global de bolsa (neto de impuestos)": {"valor": 0.08, "tipo": "Supuesto", "riesgo": "Alto; hay años con caídas fuertes y riesgo cambiario."}
+  }
+}
